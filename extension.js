@@ -8,28 +8,41 @@ const Gio = imports.gi.Gio;
 
 let text, button;
 
+//util
+function killpid(pid){
+
+}
+
 
 //Option One Kill Flash
 function killflash(){
-    
-}
-//option two kill what's producing sound.
-function killsound(){
-    //get what's making sound
-    let [res, out, err, status] = GLib.spawn_command_line_sync('pactl list sink-inputs');
-    o = out.toString();
-    output = o.split("\n").map(function(x){return x.trim()});
-    if (output.length < 2){
-	return false;
-    }
-    //string to look for
-    const search = "application.process.id";
-    let [val, _, pid] = output[21].split(" "); //MAGIC NUMBER.
-    if (val === search){
-	killpid(pid)
+//get pid of flash from ps aux | grep flash
+    let [res, out, err, status] = GLib.spawn_command_line_sync('pgrep -f flash');
+    pid = parseInt(out.toString());
+    if (pid < 1){
+	killpid(pid);
 	return true
     }
-    else{return false};
+    else{return false};    
+}
+
+//option two kill what's producing sound.
+function killsound(){
+  //get what's making sound
+  let [res, out, err, status] = GLib.spawn_command_line_sync('pactl list sink-inputs');
+  o = out.toString();
+  output = o.split("\n").map(function(x){return x.trim()});
+  if (output.length < 2){
+	 return false;
+  }
+  //string to look for
+  const search = "application.process.id";
+  let [val, _, pid] = output[21].split(" "); //MAGIC NUMBER.
+  if (val === search){
+	 killpid(pid)
+	 return true
+  }
+  else{return false};
 }
 
 function _hideHello() {
