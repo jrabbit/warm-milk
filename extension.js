@@ -10,7 +10,7 @@ let text, button;
 
 //util
 function killpid(pid){
-
+    let [res, out, err, status] = GLib.spawn_command_line_sync('kill -9 ' + pid);
 }
 
 
@@ -27,6 +27,7 @@ function killflash(){
 }
 
 //option two kill what's producing sound.
+
 function killsound(){
   //get what's making sound
   let [res, out, err, status] = GLib.spawn_command_line_sync('pactl list sink-inputs');
