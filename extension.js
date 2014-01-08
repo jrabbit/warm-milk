@@ -10,7 +10,8 @@ let text, button;
 
 //util
 function killpid(pid){
-    let [res, out, err, status] = GLib.spawn_command_line_sync('kill -9 ' + pid);
+    let [res, out, err, status] = GLib.spawn_command_line_sync('kill -15 ' + pid);
+    //15 -> SIGTERM for Chrome this is a little overkill and it kills all of Chrome.
 }
 
 
