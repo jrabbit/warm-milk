@@ -46,14 +46,20 @@ function killsound(){
   else{return false};
 }
 
+function forcerun(){
+    if (killsound()){msg = "Killed via pulseaudio"}
+    else{msg="zach is a butt"}
+    _showArb(msg);
+}
+
 function _hideHello() {
     Main.uiGroup.remove_actor(text);
     text = null;
 }
 
-function _showHello() {
+function _showArb(msg) {
     if (!text) {
-        text = new St.Label({ style_class: 'helloworld-label', text: "Zach is a butt!" });
+        text = new St.Label({ style_class: 'helloworld-label', text: msg });
         Main.uiGroup.add_actor(text);
     }
 
@@ -82,7 +88,7 @@ function init() {
                              style_class: 'system-status-icon' });
 
     button.set_child(icon);
-    button.connect('button-press-event', _showHello);
+    button.connect('button-press-event', forcerun);
 }
 
 function enable() {
