@@ -5,6 +5,8 @@ const Tweener = imports.ui.tweener;
 
 const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
+const GnomeDesktop = imports.gi.GnomeDesktop;
+
 
 let text, button;
 
@@ -22,9 +24,9 @@ function killflash(){
     pid = parseInt(out.toString());
     if (pid < 1){
 	killpid(pid);
-	return true
+	return true;
     }
-    else{return false};    
+    else{return false;};    
 }
 
 //option two kill what's producing sound.
@@ -33,7 +35,7 @@ function killsound(){
   //get what's making sound
   let [res, out, err, status] = GLib.spawn_command_line_sync('pactl list sink-inputs');
   o = out.toString();
-  output = o.split("\n").map(function(x){return x.trim()});
+  output = o.split("\n").map(function(x){return x.trim();});
   if (output.length < 2){
 	 return false;
   }
@@ -41,15 +43,15 @@ function killsound(){
   const search = "application.process.id";
   let [val, _, pid] = output[21].split(" "); //MAGIC NUMBER.
   if (val === search){
-	 killpid(pid)
-	 return true
+	 killpid(pid);
+	 return true;
   }
-  else{return false};
+  else{return false;};
 }
 
 function forcerun(){
-    if (killsound()){msg = "Killed via pulseaudio"}
-    else{msg="zach is a butt"}
+    if (killsound()){msg = "Killed via pulseaudio";}
+    else{msg="zach is a butt";}
     _showArb(msg);
 }
 
@@ -57,6 +59,9 @@ function _hideHello() {
     Main.uiGroup.remove_actor(text);
     text = null;
 }
+
+// implement https://developer.gnome.org/gnome-desktop3/stable/GnomeIdleMonitor.html
+
 
 function _showArb(msg) {
     if (!text) {
