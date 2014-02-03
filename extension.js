@@ -83,16 +83,19 @@ function _showArb(msg) {
                        onComplete: _hideHello });
 }
 
-function init() {
+function init(extensionMeta) {
+    // h/t Caffeine https://github.com/eonpatapon/gnome-shell-extension-caffeine/blob/master/caffeine%40patapon.info/extension.js#L308
+    let theme = imports.gi.Gtk.IconTheme.get_default();
+    theme.append_search_path(extensionMeta.path + "/icons");
+
     button = new St.Bin({ style_class: 'panel-button',
                           reactive: true,
                           can_focus: true,
                           x_fill: true,
                           y_fill: false,
                           track_hover: true });
-    let icon = new St.Icon({ icon_name: 'system-run-symbolic',
-                             style_class: 'system-status-icon' });
-
+    let icon = new St.Icon({icon_name: 'warm-milk-bottle-erik',
+			   style_class: 'system-status-icon'});
     button.set_child(icon);
     button.connect('button-press-event', forcerun);
 }
