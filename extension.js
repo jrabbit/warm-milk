@@ -2,6 +2,7 @@
 const St = imports.gi.St;
 const Main = imports.ui.main;
 const Tweener = imports.ui.tweener;
+const LoginManager = imports.misc.loginManager;
 
 const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
@@ -56,6 +57,12 @@ function forcerun(){
     if (killsound()){msg = "Killed via pulseaudio";}
     else{msg="zach is a butt";}
     _showArb(msg);
+}
+
+function syssleep(){
+    //Sleep the system NOW
+    let lm = LoginManager.getLoginManager();
+    lm.suspend();
 }
 
 function _hideHello() {
