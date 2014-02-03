@@ -33,20 +33,23 @@ function killflash(){
 
 function killsound(){
   //get what's making sound
-  let [res, out, err, status] = GLib.spawn_command_line_sync('pactl list sink-inputs');
-  o = out.toString();
-  output = o.split("\n").map(function(x){return x.trim();});
-  if (output.length < 2){
-	 return false;
-  }
-  //string to look for
-  const search = "application.process.id";
-  let [val, _, pid] = output[21].split(" "); //MAGIC NUMBER.
-  if (val === search){
-	 killpid(pid);
-	 return true;
-  }
-  else{return false;};
+    let [res, out, err, status] = GLib.spawn_command_line_sync('pactl list sink-inputs');
+    o = out.toString();
+    output = o.split("\n").map(function(x){return x.trim();});
+    
+    if (output.length < 2){
+	return false;
+    }
+    
+    //string to look for
+    const search = "application.process.id";
+    let [val, _, pid] = output[21].split(" "); //MAGIC NUMBER.
+    
+    if (val === search){
+	killpid(pid);
+	return true;
+    }
+    else{return false;};
 }
 
 function forcerun(){
@@ -60,7 +63,7 @@ function _hideHello() {
     text = null;
 }
 
-// implement https://developer.gnome.org/gnome-desktop3/stable/GnomeIdleMonitor.html
+//TODO: implement https://developer.gnome.org/gnome-desktop3/stable/GnomeIdleMonitor.html
 
 
 function _showArb(msg) {
