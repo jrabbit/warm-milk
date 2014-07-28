@@ -6,3 +6,6 @@
 ## Features##
 * Kill flash
 * Kill PID of sound making (PulseAudio only)
+
+## Simmilar software ##
+* https://github.com/OlofFredriksson/Sleeper

@@ -1,1 +1,4 @@
-{"shell-version": ["3.8.4"], "uuid": "warmmilk@jrabbit.github.com", "name": "Warm Milk", "description": "Sleep timer for muting and sleeping the computer."}
+{"shell-version": ["3.12"], 
+"uuid": "warmmilk@jrabbit.github.com", 
+"name": "Warm Milk", 
+"description": "Sleep timer for muting and sleeping the computer."}

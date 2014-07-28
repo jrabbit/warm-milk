@@ -65,6 +65,15 @@ function syssleep(){
     lm.suspend();
 }
 
+function volume(vol){
+}
+
+function timer(length){
+    // schedule a function for later.
+}
+
+
+
 function _hideHello() {
     Main.uiGroup.remove_actor(text);
     text = null;
